@@ -8,5 +8,22 @@ Q1. Falando de forma genérica, um banco de dados é um conjunto de dados com um
 
 Exemplos de SGBDs: Access, Interbase, MySQL, Oracle.
 
+Q2. 
 
+- Ausência de controle de acesso concorrente de vários usuários;
 
+- Impossibilidade de se executar mais de um processo ao mesmo tempo num arquivo de dados;
+
+- A definição da estrutura do arquivo armazenada no próprio código do aplicativo, o que significa que os programas controlavam as tarefas de gravação e leitura dos dados no arquivo. Isso ocosionava uma dependência entre os bancos de dados e a aplicação, tornando muito complexo o processo de manutenção de todo o sistema.
+
+- Inconsistência, redundância, dificuldade de acesso e isolamento de dados;
+
+- Problemas relativos à segurança dos dados;
+
+- Duplicidade de informações entre vários arquivos;
+
+- Aplicação dependente dos dados;
+
+- Imcapatibilidade dos formatos dos dados.
+
+Q3.
