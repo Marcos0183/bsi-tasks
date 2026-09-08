@@ -59,3 +59,15 @@ b - Isolamente: Se o exemplo fala de operações sendo realizadas simultaneament
 c - Durabilidade: Dado as perdas de informações de um processo causadas após o servidor ser reiniciado, o sistema não garantiu a durabilidade desses dados, mesmo em situações inesperadas no sistema, nesse caso, ele ter sido reiniciado.
 
 d - Consistência: O sistema não permitiu uma transferência que passasse o limite do saldo da conta, ou seja, garantindo a integridade dos dados, aplicando o pilar de consistência, pois não permitiu a realização de operações inválidas.
+
+
+
+Q5.
+
+- *Recuperação*: Mecanismo responsável por garantir que o banco de dados retorne a um estado consistente e correto após a ocorrência de falhas(como quedas de energia, erros de software, falhas de hardware ou interrupções de rede). O SGBD trabalha em etapas usando arquivos(logs) que registram as modificações de dados, e antes que as informações sejam de fato gravadas no disco principal, o log deve passar pelas etapas de verificação, assim evitando perdas de dados em caso de problemas inesperados no sistema.
+
+- *Integridade*: Refere-se à exatidão, consistência e confiabilidade dos dados armazenados, protegendo os dados contra erros de inserção, modificação ou exclusão incorreta por parte parte de usuários ou aplicações. O papel do SGBD é aplicar automaticamente as restrições definidas na DDL(PK, FK, UNIQUE, CHECK).
+
+- *Redudância*: A redundância acontece quando um mesmo dado é armazenado em mais de um local dentro do banco de dados. Portanto, o SGBD deve ser capaz de controlar essas redundâncias, impedindo o que esses dados duplicados se espalhem pelo banco de dados de forma descontrolada, já que também é de responsabilidade do SGBD  gerenciar as redundâncias intencionais. Esse processo é feit com técnicas específicas de arquitetura e lógica interna para gerenciar dados duplicados sem comprometer a integridade.
+
+- *Inconsistência*: Quando duas ou mais informações dentro do banco de dados entram em contradição direta, representando estados diferentes para uma mesma realidade. O SGBD possui formas de tratar esse problema como a rejeição automatica de comandos da própria linguagem do banco de dados que gerariam inconsistências, arquivos de logs que desfazem alterações de processos no caso de serem mal sucedidos ou o protocolo Two-Phase Commmit, que antes de salvar um dado, verifica se todos os bancos estão prontos para essa operação.
