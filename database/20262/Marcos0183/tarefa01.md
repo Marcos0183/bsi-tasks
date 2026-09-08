@@ -8,6 +8,8 @@ Q1. Falando de forma genérica, um banco de dados é um conjunto de dados com um
 
 Exemplos de SGBDs: Access, Interbase, MySQL, Oracle.
 
+
+
 Q2. 
 
 - Ausência de controle de acesso concorrente de vários usuários;
@@ -26,6 +28,8 @@ Q2.
 
 - Imcapatibilidade dos formatos dos dados.
 
+
+
 Q3.
 
 - *Atomicidade*: É a garantia de que a transação será feita totalmente ou não será feita. Nesse caso, a transação não é feita "pela metadade".
@@ -42,4 +46,16 @@ Exemplo: Vários clientes realizando saques simultaneamente em uma mesma conta. 
 
 - *Durabilidade*: Preservação dos dados após as operações terem sido realizadas. Uma vez que uma transação for efetuada, ela permanecerá dessa forma, mesmo que ocorram problemas no sistema, sem precisar de retrabalho.
 
-Exemplo: Um cliente do banco decide realizar uma transferência da sua conta para outra, logo após a transferência, o sistema do banco fica inativo. Em caso da durabilidade não ser aplicada, os dados dessa transferência, serão perdidos, e o cliente terá que refazer o mesmo processo.
+Exemplo: Um cliente do banco decide realizar uma transferência da sua conta para outra, no meio da transferência, o sistema do banco fica inativo. Em caso da durabilidade não ser aplicada, os dados dessa transferência serão perdidos totalmente ou parcialmente, e o cliente terá que refazer o mesmo processo.
+
+
+
+Q4.
+
+a - Atomicidade: Como a situação traz a ideia de que houve um processo realizado parcialmente, dados atualizados na conta de origem e não atualizados na conta de destino da transferência, nesse caso, há a quebra da garantia de atomicidade, pois, a operação ou deveria ter creditado na conta destino, completando o processo, ou não ter debitado na conta de origem, cancelando o processo.
+
+b - Isolamente: Se o exemplo fala de operações sendo realizadas simultaneamente, então o cuidado para que esses dois processos não influência um ao outro de maneira negativa, cabe a propriedade de isolamento garanta isso.
+
+c - Durabilidade: Dado as perdas de informações de um processo causadas após o servidor ser reiniciado, o sistema não garantiu a durabilidade desses dados, mesmo em situações inesperadas no sistema, nesse caso, ele ter sido reiniciado.
+
+d - Consistência: O sistema não permitiu uma transferência que passasse o limite do saldo da conta, ou seja, garantindo a integridade dos dados, aplicando o pilar de consistência, pois não permitiu a realização de operações inválidas.
