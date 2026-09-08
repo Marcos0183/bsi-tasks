@@ -71,3 +71,56 @@ Q5.
 - *Redudância*: A redundância acontece quando um mesmo dado é armazenado em mais de um local dentro do banco de dados. Portanto, o SGBD deve ser capaz de controlar essas redundâncias, impedindo o que esses dados duplicados se espalhem pelo banco de dados de forma descontrolada, já que também é de responsabilidade do SGBD  gerenciar as redundâncias intencionais. Esse processo é feit com técnicas específicas de arquitetura e lógica interna para gerenciar dados duplicados sem comprometer a integridade.
 
 - *Inconsistência*: Quando duas ou mais informações dentro do banco de dados entram em contradição direta, representando estados diferentes para uma mesma realidade. O SGBD possui formas de tratar esse problema como a rejeição automatica de comandos da própria linguagem do banco de dados que gerariam inconsistências, arquivos de logs que desfazem alterações de processos no caso de serem mal sucedidos ou o protocolo Two-Phase Commmit, que antes de salvar um dado, verifica se todos os bancos estão prontos para essa operação.
+
+
+
+Q6.
+
+a - Entidades Principais e b - Atributos
+Cliente: ID_Cliente (identificador único), Nome_Empresa, CNPJ, Email_Contato, Telefone, Data_Inicio_Contrato.
+
+Squad: ID_Squad, Nome_Squad, Data_Criacao, Especialidade_Principal.
+
+Membro: ID_Membro, Nome, CPF, Email_Corporativo, Cargo (Desenvolvedor, Testador, Líder Técnico, Supervisor, Gerente de Produto), ID_Squad (Squad à qual pertence).
+
+Projeto: ID_Projeto, Nome_Projeto, Descricao, Data_Inicio, Data_Previsao_Fim, Status, ID_Cliente (Cliente proprietário), ID_Squad (Squad responsável).
+
+Sprint (Iteração): ID_Sprint, Numero_Sprint, Data_Inicio, Data_Fim, Objetivo, ID_Projeto.
+
+Tarefa (Issue): ID_Tarefa, Titulo, Descricao, Tipo, Prioridade, Status (A Fazer, Em Andamento, Em Teste, Concluído), Pontos_Estimativa, ID_Projeto (Projeto pai), ID_Sprint (Sprint alocada - opcional), ID_Membro_Atribuido (Responsável), ID_Release (Release inclusa - opcional).
+
+Release: ID_Release, Versao (v1.0.0), Data_Lancamento, Descricao_Alteracoes, ID_Projeto (Projeto correspondente).
+
+c - Relacionamentos e Cardinalidades
+Cliente e Projeto: 1 : N (Um Cliente pode ter vários Projetos, mas cada Projeto pertence a apenas um Cliente).
+
+Squad e Projeto: 1 : N (Uma Squad pode ser responsável por múltiplos Projetos, mas cada Projeto é atribuído a apenas uma Squad principal).
+
+Squad e Membro: 1 : N (Uma Squad possui múltiplos Membros, mas cada Membro pertence a apenas uma Squad por vez).
+
+Projeto e Sprint: 1 : N (Um Projeto é composto por várias Sprints, mas uma Sprint pertence a um único Projeto).
+
+Projeto e Release: 1 : N (Um Projeto pode ter várias Releases lançadas, mas uma Release pertence a apenas um Projeto).
+
+Projeto e Tarefa: 1 : N (Um Projeto contém várias Tarefas, e toda Tarefa obrigatoriamente pertence a um Projeto).
+
+Sprint e Tarefa: 0..1 : N (Uma Sprint agrupa várias Tarefas; uma Tarefa pode ou não estar alocada em uma Sprint em um dado momento).
+
+Membro e Tarefa: 0..1 : N (Um Membro pode estar atribuído a várias Tarefas, mas cada Tarefa pode ter no máximo um Membro responsável atribuído por vez).
+
+Release e Tarefa: 0..1 : N (Uma Release pode empacotar várias Tarefas concluídas; uma Tarefa pode ou não estar associada a uma Release específica).
+
+d - Regras de Integridade (Restrições)
+Integridade de Liderança (Líder Técnico por Squad): Cada Squad deve ter exatamente um Membro associado cujo cargo seja "Líder Técnico".
+
+Obrigatoriedade de Projeto para Tarefa: Nenhuma Tarefa pode existir no banco de dados sem estar vinculada a um Projeto válido.
+
+Restrição Temporal de Sprints: A Data_Fim de uma Sprint deve ser estritamente posterior à sua Data_Inicio.
+
+Coerência de Alocação de Tarefas: Uma Tarefa só pode ser atribuída a um Membro que pertença à mesma Squad responsável pelo Projeto daquela tarefa.
+
+Apenas Tarefas Concluídas em Releases: Uma Tarefa só pode ser vinculada a uma Release se o seu Status for "Concluído".
+
+Unicidade de Identificação do Cliente: O CNPJ de um Cliente e o Email_Corporativo e CPF de um Membro devem ser únicos no sistema.
+
+Consistência do Escopo da Sprint: Uma Tarefa só pode ser vinculada a uma Sprint se essa Sprint pertencer ao mesmo Projeto da Tarefa.
