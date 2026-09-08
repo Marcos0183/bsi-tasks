@@ -27,3 +27,19 @@ Q2.
 - Imcapatibilidade dos formatos dos dados.
 
 Q3.
+
+- *Atomicidade*: É a garantia de que a transação será feita totalmente ou não será feita. Nesse caso, a transação não é feita "pela metadade".
+
+Exemplo: Um cliente de um banco transferindo parte de seu saldo para outra conta do mesmo banco. Em caso dessa propriedade não ser garantida, a tranferencia poderia resultar na subtração do saldo da conta de origem, sem adicionar o valor transferido para a conta de destino.
+
+- *Consistência*: Proteção da integridade dos dados, ou seja, é o cuidado para que processos não válidos, não possam passar pelo sistema.
+
+Exemplo: Um cliente deseja sacar dinheiro da sua conta no banco. A ausência dessa propriedade pode causar saques maiores do que o saldo do cliente.
+
+- *Isolamento*: Fato de uma transação não "atrapalhar" a outra e ocorrer de forma isolada, garantido que sejam feitas de forma individual. Isso não significa que não podem ocorrer mais de uma transação simulteneamente, mas que transações que ocorrem ao mesmo tempo, não podem impactar nas outras.
+
+Exemplo: Vários clientes realizando saques simultaneamente em uma mesma conta. Para que não ocorra de um desses clientes sacar em caso...
+
+- *Durabilidade*: Preservação dos dados após as operações terem sido realizadas. Uma vez que uma transação for efetuada, ela permanecerá dessa forma, mesmo que ocorram problemas no sistema, sem precisar de retrabalho.
+
+Exemplo: Um cliente do banco decide realizar uma transferência da sua conta para outra, logo após a transferência, o sistema do banco fica inativo. Em caso da durabilidade não ser aplicada, os dados dessa transferência, serão perdidos, e o cliente terá que refazer o mesmo processo.
